@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖前端</title>
+</head>
+<style type="text/css">
+      .g-content {
+          width: 100%;
+          background: #fbe3cc;
+          height: auto;
+          font-family: "微软雅黑", "microsoft yahei";
+      }
+      .g-content .g-lottery-case {
+          width: 500px;
+         margin: 0 auto;
+         overflow: hidden;
+     }
+     .g-content .g-lottery-case .g-left h2 {
+         font-size: 20px;
+         line-height: 32px;
+         font-weight: normal;
+         margin-left: 20px;
+     }
+
+     .g-content .g-lottery-case .g-left {
+         width: 450px;
+         float: left;
+     }
+     .g-lottery-box {
+        width: 400px;
+         height: 400px;
+         margin-left: 30px;
+         position: relative;
+         background: url(./ly-plate-c.gif) no-repeat;
+     }
+     .g-lottery-box .g-lottery-img {
+         width: 340px;
+         height: 340px;
+         position: relative;
+         background: url(./bg-lottery.png) no-repeat;
+         left: 30px;
+         top: 30px;
+    }
+     .g-lottery-box .playbtn {
+         width: 186px;
+         height: 186px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         margin-left: -94px;
+        margin-top: -94px;
+         background: url(./playbtn.png) no-repeat;
+     }
+
+</style>
+<body>
+<div class="g-content">
+      <div class="g-lottery-case">
+          <div class="g-left">
+            <!--  <h2>您已拥有<span class="playnum"></span>次抽奖机会，点击立刻抽奖！</h2> -->
+              <div class="g-lottery-box">
+                  <div class="g-lottery-img">
+                  </div>
+                <a class="playbtn" href="javascript:;" title="开始抽奖"></a>
+              </div>
+         </div>
+    </div>
+ </div>
+
+
+</body>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./jquery.rotate.min.js"></script>
+
+ <script type="text/javascript">
+      $(function() {
+         var $btn = $('.g-lottery-img');// 旋转的div
+         var isture = 0;//是否正在抽奖
+
+         $(".playbtn").click(function() {
+            //自定义url
+         	// $.get(url,"",function(json){
+          //           console.log(json);
+          //            var data = json.level;//抽奖
+          //            //data为随机出来的结果，根据概率后的结果
+          //            // data = data[Math.floor(Math.random() * data.length)];//1~6的随机数
+          //            switch(data) {
+          //                case data:
+          //                   rotateFunc(1, 0, json.name);
+          //                    break;
+          //            }
+          //   },"json");
+          
+
+          //实际项目中，将下面这行代码注释，将上面注释的开启，数据url自己配置，后台可以参考我其他文件
+             rotateFunc(1, 0, "测试数据");
+         });
+         var rotateFunc = function(awards, angle, text) {
+             isture = true;
+             $btn.stopRotate();
+             $btn.rotate({
+                 angle: 0,//旋转的角度数
+                 duration: 4000, //旋转时间
+                 animateTo: angle + 1440, //给定的角度,让它根据得出来的结果加上1440度旋转
+                 callback: function() {
+                    isture = false; // 标志为 执行完毕
+                     alert(text);
+                 }
+             });
+         };
+
+    });
+</script>
+</html>
